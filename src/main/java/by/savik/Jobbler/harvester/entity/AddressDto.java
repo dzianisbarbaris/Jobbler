@@ -3,21 +3,21 @@ package by.savik.Jobbler.harvester.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AddressDto {
+    @JsonProperty("id")
+    Long id;
+
     @JsonProperty("city")
     String city;
 
     @JsonProperty("street")
     String street;
 
-    @JsonProperty("id")
-    String id;
-
     @Override
     public String toString() {
-        return "Address{" +
-                "city='" + city + '\'' +
+        return "AddressDto{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
-                ", id='" + id + '\'' +
                 '}';
     }
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class ItemDto {
     @JsonProperty("id")
-    String id;
+    Long id;
 
     @JsonProperty("name")
     String name;

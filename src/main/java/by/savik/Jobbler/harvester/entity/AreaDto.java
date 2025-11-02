@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class AreaDto {
     @JsonProperty("id")
-    String id;
+    Long id;
 
     @JsonProperty("parent_id")
     String parent_id;
