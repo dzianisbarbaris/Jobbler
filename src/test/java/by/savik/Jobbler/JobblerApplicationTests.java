@@ -1,4 +1,4 @@
-package com.by.savik.Jobbler;
+package by.savik.Jobbler;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
