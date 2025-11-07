@@ -1,8 +1,9 @@
-package by.savik.Jobbler.database.entity;
+package by.savik.Jobbler.entity;
 
 public class Area {
 
-    private String id;
+    private Long headHunterId;
+
     private String name;
 
     private String url;

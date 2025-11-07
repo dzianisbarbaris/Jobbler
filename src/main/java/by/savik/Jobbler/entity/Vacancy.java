@@ -1,9 +1,9 @@
-package by.savik.Jobbler.database.entity;
+package by.savik.Jobbler.entity;
 
 
 import java.util.Date;
 
-public class Item {
+public class Vacancy {
 
     private String id;
 
@@ -11,7 +11,9 @@ public class Item {
 
     private Area area;
 
-    private Address address;
+    private String addressCity;
+
+    private String addressStreet;
 
     private Date created_at;
 

@@ -1,18 +1,37 @@
-package by.savik.Jobbler.database.config;
+package by.savik.Jobbler.config;
 
+import by.savik.Jobbler.entity.ApiHeadHunterClientInterface;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.List;
 
 @Configuration
 public class OpenApiConfig {
-    
+
+    @Value("${api.hh.url}")
+    private String url;
+
+    private Retrofit getRetrofitInstance() {
+        return new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
+    @Bean
+    public ApiHeadHunterClientInterface getApiHeadHunter() {
+        return getRetrofitInstance().create(ApiHeadHunterClientInterface.class);
+    }
+
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()

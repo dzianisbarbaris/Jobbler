@@ -1,12 +1,12 @@
-package by.savik.Jobbler.harvester.entity;
+package by.savik.Jobbler.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class Root {
+public class RootDto {
     @JsonProperty("items")
-    private ArrayList<ItemDto> items;
+    private List<VacancyDto> items;
 
     @JsonProperty("found")
     private int found;
@@ -20,11 +20,11 @@ public class Root {
     @JsonProperty("per_page")
     private int per_page;
 
-    public ArrayList<ItemDto> getItems() {
+    public List<VacancyDto> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<ItemDto> items) {
+    public void setItems(List<VacancyDto> items) {
         this.items = items;
     }
 
