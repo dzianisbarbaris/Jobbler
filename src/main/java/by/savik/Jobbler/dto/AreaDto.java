@@ -1,22 +1,36 @@
 package by.savik.Jobbler.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class AreaDto {
     @JsonProperty("id")
+    @Getter
+    @Setter
     private Long id;
 
     @JsonProperty("parent_id")
+    @Getter
+    @Setter
     private String parent_id;
 
     @JsonProperty("name")
+    @Getter
+    @Setter
     private String name;
 
     @JsonProperty("areas")
+    @Getter
+    @Setter
     private List<AreaDto> areas;
 
+    @Getter
+    @Setter
     private String country;
 
     public Long getId() {

@@ -50,7 +50,7 @@ public class RetroClientController {
         return ResponseEntity.ok(allAreasList);
     }
 
-    @GetMapping("/areaById/{id}")
+    @GetMapping("/areaById")
     @Operation(summary = "Get area list by id", description = "Get area list by id from HeadHunter and set country")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved list of areas"),
@@ -58,7 +58,7 @@ public class RetroClientController {
     })
     public ResponseEntity<List<AreaDto>> getAreaByHeadHunterIdAndSetCountry(
             @Parameter(description = "Area ID", required = true)
-            @PathVariable Long id,
+            @RequestParam Long id,
             @Parameter(description = "Country name", required = true)
             @RequestParam String countryName) {
         List<AreaDto> areasByHeadHunterId = retroClientService.getAreaByHeadHunterIdAndSetCountry(id, countryName);

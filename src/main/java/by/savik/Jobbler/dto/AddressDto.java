@@ -14,8 +14,6 @@ public class AddressDto {
     @JsonProperty("street")
     private String street;
 
-    @JsonProperty("areas")
-    private List<AreaDto> areas;
 
     public Long getId() {
         return id;
@@ -41,21 +39,12 @@ public class AddressDto {
         this.street = street;
     }
 
-    public List<AreaDto> getAreas() {
-        return areas;
-    }
-
-    public void setAreas(List<AreaDto> areas) {
-        this.areas = areas;
-    }
-
     @Override
     public String toString() {
         return "AddressDto{" +
-                "headHunterId=" + id +
+                "id=" + id +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
-                ", areas=" + areas +
                 '}';
     }
 }

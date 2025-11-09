@@ -80,12 +80,16 @@ public class RetroClientService implements RetroClientServiceInterface {
             if (areas.isEmpty()) {
                 throw new IllegalStateException("Areas list is empty!");
             }
-            return areas.stream().flatMap(areaDto -> areaDto.getAreas().stream()
+            for (AreaDto areaDto : areas){
+                areaDto.setCountry(countryName);
+            }
+            List<AreaDto> listAreas = areas.stream().flatMap(areaDto -> areaDto.getAreas().stream()
                     .peek(areaDto1 -> areaDto1.setCountry(countryName))).toList();
+            areas.addAll(listAreas);
+            System.out.println(areas.size());
+            return areas;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 }
