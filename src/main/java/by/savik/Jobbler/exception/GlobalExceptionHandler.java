@@ -1,15 +1,14 @@
 package by.savik.Jobbler.exception;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
@@ -29,7 +28,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @Getter
+    @Setter
     public static class ErrorResponse {
+        // Getters and setters
         private int status;
         private String message;
         private String path;
@@ -50,49 +52,10 @@ public class GlobalExceptionHandler {
             this.author = author;
             this.timestamp = timestamp;
         }
-
-        // Getters and setters
-        public int getStatus() {
-            return status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public String getAuthor() {
-            return author;
-        }
-
-        public void setAuthor(String author) {
-            this.author = author;
-        }
-
-        public String getPath() {
-            return path;
-        }
-
-        public void setPath(String path) {
-            this.path = path;
-        }
-
-        public LocalDateTime getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(LocalDateTime timestamp) {
-            this.timestamp = timestamp;
-        }
     }
 
+    @Getter
+    @Setter
     public static class ValidationErrorResponse {
         private int status;
         private String message;
@@ -103,39 +66,6 @@ public class GlobalExceptionHandler {
             this.status = status;
             this.message = message;
             this.errors = errors;
-            this.timestamp = timestamp;
-        }
-
-        // Getters and setters
-        public int getStatus() {
-            return status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public Map<String, String> getErrors() {
-            return errors;
-        }
-
-        public void setErrors(Map<String, String> errors) {
-            this.errors = errors;
-        }
-
-        public LocalDateTime getTimestamp() {
-            return timestamp;
-        }
-
-        public void setTimestamp(LocalDateTime timestamp) {
             this.timestamp = timestamp;
         }
     }

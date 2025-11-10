@@ -13,9 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+//TODO назвать VacancyController а то у тебя в api вылазит реализация(retro) кому какое дело как у тебя реализовано
 @RestController
-@RequestMapping("/api/retroClient")
+@RequestMapping("/api/vacancy")
 @Tag(name = "HeadHunter API Management", description = "APIs for managing Headhunter APIs")
 public class RetroClientController {
 
@@ -26,7 +26,7 @@ public class RetroClientController {
         this.retroClientService = retroClientService;
     }
 
-    @GetMapping("/getByKeyword")
+    @GetMapping("/keyword")
     @Operation(summary = "Get vacancy list", description = "Get vacancy list by keyword from HeadHunter")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved list of vacancies"),
@@ -39,7 +39,8 @@ public class RetroClientController {
         return ResponseEntity.ok(vacancyListFromHeadHunter);
     }
 
-    @GetMapping("/getAllAreas")
+    //TODO может отдельный контроллер сделать для area
+    @GetMapping("/areas")
     @Operation(summary = "Get All areas list", description = "Get areas list from HeadHunter")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved list of areas"),
@@ -50,7 +51,7 @@ public class RetroClientController {
         return ResponseEntity.ok(allAreasList);
     }
 
-    @GetMapping("/areaById")
+    @GetMapping("/area")
     @Operation(summary = "Get area list by id", description = "Get area list by id from HeadHunter and set country")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved list of areas"),

@@ -5,10 +5,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "employers")
 public class Employer {
@@ -47,42 +51,6 @@ public class Employer {
     public void addVacancy(Vacancy vacancy) {
         vacancies.add(vacancy);
         vacancy.setEmployer(this);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getHeadHunterId() {
-        return headHunterId;
-    }
-
-    public void setHeadHunterId(Long headHunterId) {
-        this.headHunterId = headHunterId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Vacancy> getVacancies() {
-        return vacancies;
-    }
-
-    public void setVacancies(List<Vacancy> vacancies) {
-        this.vacancies = vacancies;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     @Override
