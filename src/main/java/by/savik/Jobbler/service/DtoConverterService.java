@@ -18,6 +18,7 @@ public class DtoConverterService implements DtoConverterServiceInterface {
     public List<Area> convertAllDtoToAreas(List<AreaDto> dtoList) {
         List<Area> areaList = new ArrayList<>();
         for (AreaDto dto : dtoList) {
+            //TODO можно сразу dto в конструктор передать
             Area area = new Area(dto.getId(), dto.getName(), dto.getCountry());
             areaList.add(area);
         }
@@ -28,11 +29,14 @@ public class DtoConverterService implements DtoConverterServiceInterface {
     public List<Vacancy> convertAllDtoToVacancy(List<VacancyDto> dtoList) {
         List<Vacancy> vacancyList = new ArrayList<>();
         for (VacancyDto dto : dtoList) {
+            //TODO можно сразу dto в конструктор передать
             Area area = new Area(dto.getArea().getId(), dto.getArea().getName());
+            //TODO можно сразу dto в конструктор передать
             Employer employer = new Employer(dto.getEmployer().getId(), dto.getEmployer().getName(), dto.getEmployer().getAlternate_url());
             Optional<AddressDto> addressDto = Optional.ofNullable(dto.getAddress());
             if (addressDto.isPresent()) {
-                Vacancy vacancy = new Vacancy(dto.getId(), dto.getName(), addressDto.get().getCity(), addressDto.get().getStreet(), dto.getCreated_at(), dto.getAlternate_url());
+                //TODO можно сразу dto в конструктор передать
+                Vacancy vacancy = new Vacancy(dto.getId(), dto.getName(), addressDto.get().getCity(), addressDto.get().getStreet(), dto.getCreated_at(), dto.getAlternateUrl());
 
                 vacancy.setEmployer(employer);
                 vacancy.setArea(area);

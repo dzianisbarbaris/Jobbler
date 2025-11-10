@@ -6,10 +6,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "vacancies")
 public class Vacancy {
@@ -62,74 +66,6 @@ public class Vacancy {
         this.addressStreet = addressStreet;
         this.createdDate = createdDate;
         this.url = url;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getHeadHunterId() {
-        return headHunterId;
-    }
-
-    public void setHeadHunterId(Long headHunterId) {
-        this.headHunterId = headHunterId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
-    }
-
-    public String getAddressCity() {
-        return addressCity;
-    }
-
-    public void setAddressCity(String addressCity) {
-        this.addressCity = addressCity;
-    }
-
-    public String getAddressStreet() {
-        return addressStreet;
-    }
-
-    public void setAddressStreet(String addressStreet) {
-        this.addressStreet = addressStreet;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Employer getEmployer() {
-        return employer;
-    }
-
-    public void setEmployer(Employer employer) {
-        this.employer = employer;
     }
 
     @Override

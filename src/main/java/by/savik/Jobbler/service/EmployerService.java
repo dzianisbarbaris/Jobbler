@@ -1,6 +1,5 @@
 package by.savik.Jobbler.service;
 
-import by.savik.Jobbler.entity.Area;
 import by.savik.Jobbler.entity.Employer;
 import by.savik.Jobbler.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;

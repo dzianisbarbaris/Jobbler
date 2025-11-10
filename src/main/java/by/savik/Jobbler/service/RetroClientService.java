@@ -1,9 +1,10 @@
 package by.savik.Jobbler.service;
 
-import by.savik.Jobbler.entity.ApiHeadHunterClientInterface;
 import by.savik.Jobbler.dto.AreaDto;
-import by.savik.Jobbler.dto.VacancyDto;
 import by.savik.Jobbler.dto.RootDto;
+import by.savik.Jobbler.dto.VacancyDto;
+import by.savik.Jobbler.entity.ApiHeadHunterClientInterface;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.HttpException;
@@ -12,8 +13,10 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
+@Log4j2
 public class RetroClientService implements RetroClientServiceInterface {
     private final ApiHeadHunterClientInterface apiClient;
 
@@ -30,7 +33,7 @@ public class RetroClientService implements RetroClientServiceInterface {
             if (!firstRootResponse.isSuccessful()) {
                 throw new HttpException(firstRootResponse);
             }
-            List<VacancyDto> items = firstRootResponse.body().getItems();
+            List<VacancyDto> items = Objects.requireNonNull(firstRootResponse.body()).getItems();
             if (items.isEmpty()) {
                 throw new IllegalStateException("Items list is empty!");
             }
@@ -41,7 +44,7 @@ public class RetroClientService implements RetroClientServiceInterface {
                 if (!nextRootResponse.isSuccessful()) {
                     throw new HttpException(nextRootResponse);
                 }
-                List<VacancyDto> itemsNext = nextRootResponse.body().getItems();
+                List<VacancyDto> itemsNext = Objects.requireNonNull(nextRootResponse.body()).getItems();
                 if (itemsNext.isEmpty()) {
                     throw new IllegalStateException("Items list is empty!");
                 }
@@ -49,6 +52,7 @@ public class RetroClientService implements RetroClientServiceInterface {
                 Thread.sleep(2000);
             }
         } catch (IOException | InterruptedException e) {
+            Thread.currentThread().interrupt();
             throw new RuntimeException(e.getMessage());
         }
         return finalItemsList;
@@ -60,7 +64,7 @@ public class RetroClientService implements RetroClientServiceInterface {
             if (!response.isSuccessful()) {
                 throw new HttpException(response);
             }
-            List<AreaDto> areas = response.body().stream().flatMap(areaDto -> areaDto.getAreas().stream()).toList();
+            List<AreaDto> areas = Objects.requireNonNull(response.body()).stream().flatMap(areaDto -> areaDto.getAreas().stream()).toList();
             if (areas.isEmpty()) {
                 throw new IllegalStateException("Areas list is empty!");
             }
@@ -76,7 +80,7 @@ public class RetroClientService implements RetroClientServiceInterface {
             if (!response.isSuccessful()) {
                 throw new HttpException(response);
             }
-            List<AreaDto> areas = response.body().getAreas();
+            List<AreaDto> areas = Objects.requireNonNull(response.body()).getAreas();
             if (areas.isEmpty()) {
                 throw new IllegalStateException("Areas list is empty!");
             }
@@ -86,7 +90,7 @@ public class RetroClientService implements RetroClientServiceInterface {
             List<AreaDto> listAreas = areas.stream().flatMap(areaDto -> areaDto.getAreas().stream()
                     .peek(areaDto1 -> areaDto1.setCountry(countryName))).toList();
             areas.addAll(listAreas);
-            System.out.println(areas.size());
+            log.debug(areas.size());
             return areas;
         } catch (IOException e) {
             throw new RuntimeException(e);
