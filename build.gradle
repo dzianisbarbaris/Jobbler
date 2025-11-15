@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.0.0-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.1.7'
+	/*id("io.freefair.lombok") version "9.1.0"*/
 }
 
 group = 'com.by.savik'
@@ -29,7 +30,8 @@ dependencies {
 	implementation 'com.squareup.retrofit2:retrofit:3.0.0'
 	implementation 'com.squareup.retrofit2:converter-gson:3.0.0'
 	implementation 'org.slf4j:slf4j-api:2.0.17'
-	implementation 'ch.qos.logback:logback-classic:1.5.18'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'org.projectlombok:lombok:1.18.34'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
