@@ -8,6 +8,7 @@ import by.savik.jobbler.entity.Employer;
 import by.savik.jobbler.entity.Vacancy;
 import org.springframework.stereotype.Service;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +35,7 @@ public class DtoConverterService implements DtoConverterServiceInterface {
                 vacancyDto.getName(),
                 Optional.ofNullable(vacancyDto.getAddress()).map(AddressDto::getCity).orElse(null),
                 Optional.ofNullable(vacancyDto.getAddress()).map(AddressDto::getStreet).orElse(null),
-                vacancyDto.getCreated_at(),
+                vacancyDto.dateMapper(),
                 vacancyDto.getAlternate_url(),
                 new Area(vacancyDto.getArea().getId(), vacancyDto.getArea().getName()),
                 new Employer(vacancyDto.getEmployer().getId(), vacancyDto.getEmployer().getName(), vacancyDto.getEmployer().getAlternate_url())

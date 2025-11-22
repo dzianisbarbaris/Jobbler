@@ -4,6 +4,7 @@ import by.savik.jobbler.entity.ApiHeadHunterClientInterface;
 import by.savik.jobbler.dto.AreaDto;
 import by.savik.jobbler.dto.VacancyDto;
 import by.savik.jobbler.dto.RootDto;
+import by.savik.jobbler.exception.HeadHunterApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,8 +52,7 @@ public class HeadHunterService implements HeadHunterServiceInterface {
                 Thread.sleep(200);
             }
         } catch (IOException | InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new RuntimeException(e.getMessage());
+            throw new HeadHunterApiException("Ошибка при обработке запроса к HeadHunter", e);
         }
         log.debug(String.valueOf(finalItemsList.size()));
         return finalItemsList;
@@ -64,14 +64,15 @@ public class HeadHunterService implements HeadHunterServiceInterface {
             if (!response.isSuccessful()) {
                 throw new HttpException(response);
             }
-            List<AreaDto> areas = Objects.requireNonNull(response.body()).stream().flatMap(areaDto -> areaDto.getAreas().stream()).toList();
+            List<AreaDto> areas = Objects.requireNonNull(response.body()).stream()
+                    .flatMap(areaDto -> areaDto.getAreas().stream()).toList();
             if (areas.isEmpty()) {
                 throw new IllegalStateException("Areas list is empty!");
             }
             log.debug(String.valueOf(areas.size()));
             return areas;
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new HeadHunterApiException("Ошибка при обработке запроса к HeadHunter", e);
         }
     }
 
@@ -94,7 +95,7 @@ public class HeadHunterService implements HeadHunterServiceInterface {
             log.debug(String.valueOf(areas.size()));
             return areas;
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new HeadHunterApiException(e.getMessage());
         }
     }
 }

@@ -9,8 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "vacancies")
@@ -44,7 +43,7 @@ public class Vacancy {
     private String addressStreet;
 
     @DateTimeFormat
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
     @NotBlank(message = "Vacancy URL is required")
     @Size(min = 2, max = 100, message = "Vacancy URL must be between 2 and 100 characters")
@@ -59,7 +58,7 @@ public class Vacancy {
     public Vacancy() {
     }
 
-    public Vacancy(Long headHunterId, String name, String addressCity, String addressStreet, Date createdDate, String url) {
+    public Vacancy(Long headHunterId, String name, String addressCity, String addressStreet, LocalDateTime createdDate, String url) {
         this.headHunterId = headHunterId;
         this.name = name;
         this.addressCity = addressCity;
@@ -68,7 +67,7 @@ public class Vacancy {
         this.url = url;
     }
 
-    public Vacancy(Long headHunterId, String name, String addressCity, String addressStreet, Date createdDate, String url, Area area, Employer employer) {
+    public Vacancy(Long headHunterId, String name, String addressCity, String addressStreet, LocalDateTime createdDate, String url, Area area, Employer employer) {
         this.headHunterId = headHunterId;
         this.name = name;
         this.addressCity = addressCity;

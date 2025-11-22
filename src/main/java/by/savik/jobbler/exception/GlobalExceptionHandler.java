@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EmployerNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleEmployerNotFoundException(
-            ResourceNotFoundException ex, WebRequest request) {
+            EmployerNotFoundException ex, WebRequest request) {
 
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
@@ -56,7 +56,20 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AreaNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleAreaNotFoundException(
-            ResourceNotFoundException ex, WebRequest request) {
+            AreaNotFoundException ex, WebRequest request) {
+
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                ex.getMessage(),
+                request.getDescription(false),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(HeadHunterApiException.class)
+    public ResponseEntity<ErrorResponse> handleHeadHunterApiException(
+            HeadHunterApiException ex, WebRequest request) {
 
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
@@ -75,7 +88,6 @@ public class GlobalExceptionHandler {
         private String message;
         private String path;
         private LocalDateTime timestamp;
-        private String author;
 
         public ErrorResponse(int status, String message, String path, LocalDateTime timestamp) {
             this.status = status;

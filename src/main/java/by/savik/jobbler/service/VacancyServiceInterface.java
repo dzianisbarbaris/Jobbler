@@ -2,6 +2,8 @@ package by.savik.jobbler.service;
 
 import by.savik.jobbler.entity.Vacancy;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -21,5 +23,5 @@ public interface VacancyServiceInterface {
 
     void deleteAllVacancies();
 
-    void deleteByCreatedDateBefore(Date date);
+    void deleteByCreatedDateBefore(LocalDateTime date);
 }

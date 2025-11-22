@@ -12,6 +12,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -95,7 +97,7 @@ public class VacancyController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<Void> deleteVacanciesByDate(@Parameter(description = "Date ISO format", required = true)
-                                                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
+                                                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime date) {
         vacancyService.deleteByCreatedDateBefore(date);
         return ResponseEntity.noContent().build();
     }

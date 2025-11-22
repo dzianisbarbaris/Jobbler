@@ -2,9 +2,9 @@ package by.savik.jobbler.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Data
@@ -29,4 +29,8 @@ public class VacancyDto {
 
     @JsonProperty("employer")
     private EmployerDto employer;
+
+    public LocalDateTime dateMapper(){
+        return this.created_at.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
 }

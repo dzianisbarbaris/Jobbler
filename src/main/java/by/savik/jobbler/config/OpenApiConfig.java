@@ -41,11 +41,8 @@ public class OpenApiConfig {
                         .version("1.0.0")
                         .contact(new Contact()
                                 .name("Vacancy Management Team")
-                                .email("support@hhvacancy.com")
-                                .url("https://hh-jobbler.com"))
-                        .license(new License()
-                                .name("MIT License")
-                                .url("https://opensource.org/licenses/MIT")))
+                                .email("support@jobbler.com")
+                                .url("https://hh-jobbler.com")))
                 .servers(List.of(
                         new Server()
                                 .url("http://localhost:8081")

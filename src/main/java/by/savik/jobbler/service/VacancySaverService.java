@@ -1,0 +1,48 @@
+package by.savik.jobbler.service;
+
+import by.savik.jobbler.dto.VacancyDto;
+import by.savik.jobbler.entity.Vacancy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+public class VacancySaverService implements VacancySaverServiceInterface {
+
+    private final AreaServiceInterface areaService;
+    private final EmployerServiceInterface employerService;
+    private final VacancyServiceInterface vacancyService;
+    private final DtoConverterServiceInterface dtoConverterService;
+    private final HeadHunterServiceInterface headHunterService;
+
+    @Autowired
+    public VacancySaverService(AreaServiceInterface areaService, EmployerServiceInterface employerService,
+                               VacancyServiceInterface vacancyService, DtoConverterServiceInterface dtoConverterService,
+                               HeadHunterServiceInterface headHunterService) {
+        this.areaService = areaService;
+        this.employerService = employerService;
+        this.vacancyService = vacancyService;
+        this.dtoConverterService = dtoConverterService;
+        this.headHunterService = headHunterService;
+    }
+
+    @Transactional
+    public List<Vacancy> convertDtoToVacancyAndSave (String keyWord){
+        List<VacancyDto> vacancyDtoList = headHunterService.getVacancyListFromHeadHunter(keyWord);
+        List<Vacancy> vacancyList = dtoConverterService.convertAllDtoToVacancy(vacancyDtoList);
+        for (Vacancy vacancy : vacancyList) {
+            if (vacancyService.isAbsentByHeadHunterId(vacancy)) {
+                if (areaService.isAbsentByHeadHunterId(vacancy.getArea())) {
+                    areaService.createArea(vacancy.getArea());
+                }
+                if (employerService.isAbsentByHeadHunterId(vacancy.getEmployer())) {
+                    employerService.createEmployer(vacancy.getEmployer());
+                }
+                vacancyService.createVacancy(vacancy);
+            }
+        }
+        return vacancyList;
+    }
+}
