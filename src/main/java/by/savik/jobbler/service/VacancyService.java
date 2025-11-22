@@ -101,4 +101,10 @@ public class VacancyService implements VacancyServiceInterface {
     public void deleteByCreatedDateBefore(LocalDateTime date) {
         vacancyRepository.deleteByCreatedDateBefore(date);
     }
+
+    @Transactional
+    public void deleteOlderThanWeek() {
+        LocalDateTime localDateTime = LocalDateTime.now().minusDays(7);
+        vacancyRepository.deleteByCreatedDateBefore(localDateTime);
+    }
 }

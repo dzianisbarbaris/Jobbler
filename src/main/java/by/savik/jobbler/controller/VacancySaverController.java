@@ -41,4 +41,18 @@ public class VacancySaverController {
         List<Vacancy> vacancyList = vacancySaver.convertDtoToVacancyAndSave(keyWord);
         return ResponseEntity.ok(vacancyList);
     }
+
+    @PostMapping("/saveDailyVacancies")
+    @Operation(summary = "Create a new Daily vacancies", description = "Create a new daily list of vacancies and save them to database")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved list of vacancies"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    public ResponseEntity<List<Vacancy>> convertDailyDtoToVacanciesAndSave() {
+        List<Vacancy> vacancyList = vacancySaver.convertDailyDtoToVacanciesAndSave();
+        return ResponseEntity.ok(vacancyList);
+    }
+
+
 }

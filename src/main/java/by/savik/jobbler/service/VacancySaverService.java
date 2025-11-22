@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class VacancySaverService implements VacancySaverServiceInterface {
+
+    private static final List<String> dailyKeyWords = List.of("Java", "JavaScript", "DevOps", "IT Manager", "Developer",
+            "Python", "1C", "Quality Assurance", "Business Analyst", "Тестировщик", "Аналитик", "Разработчик");
 
     private final AreaServiceInterface areaService;
     private final EmployerServiceInterface employerService;
@@ -44,5 +48,27 @@ public class VacancySaverService implements VacancySaverServiceInterface {
             }
         }
         return vacancyList;
+    }
+
+    @Transactional
+    public List<Vacancy> convertDailyDtoToVacanciesAndSave(){
+        List<Vacancy> finalVacancyList = new ArrayList<>();
+        for (String keyWord : dailyKeyWords){
+            List<VacancyDto> vacancyDtoList = headHunterService.getVacancyListFromHeadHunter(keyWord);
+            List<Vacancy> vacancyList = dtoConverterService.convertAllDtoToVacancy(vacancyDtoList);
+            for (Vacancy vacancy : vacancyList) {
+                if (vacancyService.isAbsentByHeadHunterId(vacancy)) {
+                    if (areaService.isAbsentByHeadHunterId(vacancy.getArea())) {
+                        areaService.createArea(vacancy.getArea());
+                    }
+                    if (employerService.isAbsentByHeadHunterId(vacancy.getEmployer())) {
+                        employerService.createEmployer(vacancy.getEmployer());
+                    }
+                    vacancyService.createVacancy(vacancy);
+                }
+            }
+            finalVacancyList.addAll(vacancyList);
+        }
+        return finalVacancyList;
     }
 }

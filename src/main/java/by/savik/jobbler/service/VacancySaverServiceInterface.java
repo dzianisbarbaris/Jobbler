@@ -7,4 +7,6 @@ import java.util.List;
 public interface VacancySaverServiceInterface {
 
     List<Vacancy> convertDtoToVacancyAndSave(String keyWord);
+
+    List<Vacancy> convertDailyDtoToVacanciesAndSave();
 }

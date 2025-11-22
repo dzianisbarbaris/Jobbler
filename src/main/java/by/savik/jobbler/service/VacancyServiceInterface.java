@@ -24,4 +24,6 @@ public interface VacancyServiceInterface {
     void deleteAllVacancies();
 
     void deleteByCreatedDateBefore(LocalDateTime date);
+
+    void deleteOlderThanWeek();
 }

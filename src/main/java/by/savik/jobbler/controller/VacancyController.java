@@ -101,4 +101,17 @@ public class VacancyController {
         vacancyService.deleteByCreatedDateBefore(date);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/deleteOlderThanWeek")
+    @Operation(summary = "Delete vacancies older than a week", description = "Delete vacancies from DataBase older than a week")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Vacancies deleted successfully"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    public ResponseEntity<Void> deleteVacanciesOlderThanWeek() {
+        vacancyService.deleteOlderThanWeek();
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

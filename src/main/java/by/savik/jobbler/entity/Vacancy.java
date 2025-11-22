@@ -80,16 +80,15 @@ public class Vacancy {
 
     @Override
     public String toString() {
-        return "Vacancy{" +
-                "id=" + id +
-                ", headHunterId=" + headHunterId +
-                ", name='" + name + '\'' +
-                ", area=" + area +
-                ", addressCity='" + addressCity + '\'' +
-                ", addressStreet='" + addressStreet + '\'' +
-                ", createdDate=" + createdDate +
-                ", url='" + url + '\'' +
-                ", employer=" + employer +
-                '}';
+        return "Vacancy[id=" + id +
+                ", hhId=" + headHunterId +
+                ", name='" + name +
+                "', area='" + (area != null ? area.getName() : "null") +
+                "', city='" + addressCity +
+                "', street='" + addressStreet +
+                "', created=" + createdDate +
+                ", url='" + url +
+                "', employer='" + (employer != null ? employer.getName() : "null") +
+                "]\n";
     }
 }
