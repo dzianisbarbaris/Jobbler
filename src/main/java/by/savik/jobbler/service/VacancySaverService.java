@@ -3,7 +3,6 @@ package by.savik.jobbler.service;
 import by.savik.jobbler.dto.VacancyDto;
 import by.savik.jobbler.entity.Vacancy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +11,6 @@ import java.util.List;
 
 @Service
 public class VacancySaverService implements VacancySaverServiceInterface {
-
     private final List<String> dailyKeyWords = List.of("Разработчик", "Тестировщик", "Java", "JavaScript",
             "DevOps", "IT Manager", "Developer", "Python", "1C", "Quality Assurance", "Business Analyst", "Аналитик");
 

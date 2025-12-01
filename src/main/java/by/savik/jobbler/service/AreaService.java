@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Service
 public class AreaService implements AreaServiceInterface {
-
     private final AreaRepository areaRepository;
 
     @Autowired
@@ -36,7 +35,7 @@ public class AreaService implements AreaServiceInterface {
     }
 
     @Transactional(readOnly = true)
-    public List<Area> getAreasByCountryName(String name){
+    public List<Area> getAreasByCountryName(String name) {
         List<Area> areaList = areaRepository.findByCountryContainingIgnoreCase(name);
         if (areaList.isEmpty()) {
             throw new AreaNotFoundException("Area not found by country name: " + name);
@@ -46,8 +45,8 @@ public class AreaService implements AreaServiceInterface {
     }
 
     @Transactional
-    public Area createArea(Area area) {
-        return areaRepository.save(area);
+    public void createArea(Area area) {
+        areaRepository.save(area);
     }
 
     @Transactional(readOnly = true)

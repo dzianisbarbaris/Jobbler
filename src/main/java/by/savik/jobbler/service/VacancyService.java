@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,7 +66,7 @@ public class VacancyService implements VacancyServiceInterface {
     }
 
     @Transactional
-    public Vacancy createVacancy(Vacancy vacancy) {
+    public void createVacancy(Vacancy vacancy) {
         Long areaHeadHunterId = vacancy.getArea().getHeadHunterId();
         Area area = areaRepository.findByHeadHunterId(areaHeadHunterId)
                 .orElseThrow(() -> new ResourceNotFoundException("Area not found with HeadHunterId: " + areaHeadHunterId));
@@ -83,7 +81,6 @@ public class VacancyService implements VacancyServiceInterface {
         area.addVacancy(savedVacancy);
         employer.addVacancy(savedVacancy);
 
-        return savedVacancy;
     }
 
     @Transactional(readOnly = true)

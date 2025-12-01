@@ -8,7 +8,6 @@ import by.savik.jobbler.entity.Employer;
 import by.savik.jobbler.entity.Vacancy;
 import org.springframework.stereotype.Service;
 
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +15,7 @@ import java.util.Optional;
 @Service
 public class DtoConverterService implements DtoConverterServiceInterface {
 
-
-    public Area convertAreaDtoToArea(AreaDto areaDto){
+    public Area convertAreaDtoToArea(AreaDto areaDto) {
         return new Area(areaDto.getId(), areaDto.getName(), areaDto.getCountry());
     }
 
@@ -29,7 +27,7 @@ public class DtoConverterService implements DtoConverterServiceInterface {
         return areaList;
     }
 
-    public Vacancy convertVacancyDtoToVacancy(VacancyDto vacancyDto){
+    public Vacancy convertVacancyDtoToVacancy(VacancyDto vacancyDto) {
         return new Vacancy(
                 vacancyDto.getId(),
                 vacancyDto.getName(),
@@ -39,7 +37,7 @@ public class DtoConverterService implements DtoConverterServiceInterface {
                 vacancyDto.getAlternate_url(),
                 new Area(vacancyDto.getArea().getId(), vacancyDto.getArea().getName()),
                 new Employer(vacancyDto.getEmployer().getId(), vacancyDto.getEmployer().getName(), vacancyDto.getEmployer().getAlternate_url())
-                );
+        );
     }
 
     public List<Vacancy> convertAllDtoToVacancy(List<VacancyDto> dtoList) {
@@ -49,6 +47,4 @@ public class DtoConverterService implements DtoConverterServiceInterface {
         }
         return vacancyList;
     }
-
-
 }

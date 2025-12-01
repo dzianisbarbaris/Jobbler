@@ -1,10 +1,7 @@
 package by.savik.jobbler.controller;
 
-import by.savik.jobbler.dto.AreaDto;
-import by.savik.jobbler.dto.VacancyDto;
-import by.savik.jobbler.entity.Area;
 import by.savik.jobbler.entity.Vacancy;
-import by.savik.jobbler.service.*;
+import by.savik.jobbler.service.VacancySaverServiceInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -12,7 +9,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,7 +20,6 @@ import java.util.List;
 @RequestMapping("/api/vacancySaver")
 @Tag(name = "Vacancy Saver Management", description = "APIs for converting DTO to Vacancy and save to database")
 public class VacancySaverController {
-
     private final VacancySaverServiceInterface vacancySaver;
 
     @Autowired
@@ -53,6 +52,4 @@ public class VacancySaverController {
         List<Vacancy> vacancyList = vacancySaver.convertDailyDtoToVacanciesAndSave();
         return ResponseEntity.ok(vacancyList);
     }
-
-
 }

@@ -1,7 +1,6 @@
 package by.savik.jobbler.controller;
 
 import by.savik.jobbler.entity.Employer;
-import by.savik.jobbler.entity.Vacancy;
 import by.savik.jobbler.service.EmployerServiceInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,7 +20,6 @@ import java.util.List;
 @RequestMapping("/api/employer")
 @Tag(name = "Employer Management", description = "APIs for managing employers")
 public class EmployerController {
-
     private final EmployerServiceInterface employerService;
 
     @Autowired

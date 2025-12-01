@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface AreaRepository extends JpaRepository<Area, Long> {
-
     Optional<Area> findByHeadHunterId(Long headHunterId);
 
     List<Area> findByNameContainingIgnoreCase(String name);

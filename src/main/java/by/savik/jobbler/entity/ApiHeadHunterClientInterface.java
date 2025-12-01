@@ -11,7 +11,6 @@ import java.util.List;
 
 
 public interface ApiHeadHunterClientInterface {
-
     @GET("vacancies?per_page=100&page=0&period=1&")
     Call<RootDto> getFirstJson(@Query("text") String text);
 

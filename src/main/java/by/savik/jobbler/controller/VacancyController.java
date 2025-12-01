@@ -12,16 +12,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/vacancy")
 @Tag(name = "Vacancies Management", description = "APIs for managing vacancies")
 public class VacancyController {
-
     private final VacancyServiceInterface vacancyService;
 
     @Autowired
@@ -61,7 +58,7 @@ public class VacancyController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<List<Vacancy>> getVacanciesByAddressCity(@Parameter(description = "addressCity", required = true)
-                                                               @RequestParam String addressCity) {
+                                                                   @RequestParam String addressCity) {
         List<Vacancy> vacancies = vacancyService.getVacanciesByAddressCity(addressCity);
         return ResponseEntity.ok(vacancies);
     }
@@ -74,7 +71,7 @@ public class VacancyController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<List<Vacancy>> getVacanciesByAreaCountryName(@Parameter(description = "countryName", required = true)
-                                                                   @RequestParam String countryName) {
+                                                                       @RequestParam String countryName) {
         List<Vacancy> vacancies = vacancyService.getVacanciesByAreaCountryName(countryName);
         return ResponseEntity.ok(vacancies);
     }
@@ -112,6 +109,4 @@ public class VacancyController {
         vacancyService.deleteOlderThanWeek();
         return ResponseEntity.noContent().build();
     }
-
-
 }

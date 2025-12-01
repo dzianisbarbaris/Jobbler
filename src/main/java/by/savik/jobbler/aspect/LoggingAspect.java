@@ -15,7 +15,6 @@ import java.util.Arrays;
 @Aspect
 @Slf4j
 public class LoggingAspect {
-
     @Pointcut("execution(public * by.savik.jobbler.controller.*.*(..))*")
     public void controllerLog() {
     }
@@ -45,10 +44,8 @@ public class LoggingAspect {
     public void doBeforeService(JoinPoint jp) {
         String className = jp.getSignature().getDeclaringTypeName();
         String methodName = jp.getSignature().getName();
-
         Object[] args = jp.getArgs();
         String argsString = args.length > 0 ? Arrays.toString(args) : "METHOD HAS NO ARGUMENTS";
-
         log.info("RUN SERVICE: SERVICE_METHOD: {}.{}. METHOD ARGUMENTS: [{}]",
                 className, methodName, argsString);
     }
@@ -70,13 +67,10 @@ public class LoggingAspect {
         long start = System.currentTimeMillis();
         Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
-
         log.info("Execution method: {}.{}. Execution time: {}",
                 joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(),
                 executionTime);
-
         return proceed;
-
     }
 }

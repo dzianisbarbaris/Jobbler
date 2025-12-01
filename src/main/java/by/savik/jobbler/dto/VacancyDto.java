@@ -30,7 +30,7 @@ public class VacancyDto {
     @JsonProperty("employer")
     private EmployerDto employer;
 
-    public LocalDateTime dateMapper(){
+    public LocalDateTime dateMapper() {
         return this.created_at.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 }

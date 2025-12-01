@@ -10,7 +10,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -18,7 +21,6 @@ import java.util.List;
 @RequestMapping("/api/headhunter")
 @Tag(name = "HeadHunter API Management", description = "APIs for managing Headhunter APIs")
 public class HeadHunterController {
-
     private final HeadHunterServiceInterface headHunterService;
 
     @Autowired

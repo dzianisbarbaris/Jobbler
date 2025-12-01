@@ -9,8 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class AreaSaverService implements AreaSaverServiceInterface{
-
+public class AreaSaverService implements AreaSaverServiceInterface {
     private final AreaServiceInterface areaService;
     private final DtoConverterServiceInterface dtoConverterService;
     private final HeadHunterServiceInterface headHunterService;
@@ -24,7 +23,7 @@ public class AreaSaverService implements AreaSaverServiceInterface{
     }
 
     @Transactional
-    public List<Area> convertDtoToAreaAndSave(Long id, String countryName){
+    public List<Area> convertDtoToAreaAndSave(Long id, String countryName) {
         List<AreaDto> areaDtoList = headHunterService.getAreaByHeadHunterIdAndSetCountry(id, countryName);
         List<Area> areaList = dtoConverterService.convertAllDtoToAreas(areaDtoList);
         for (Area area : areaList) {

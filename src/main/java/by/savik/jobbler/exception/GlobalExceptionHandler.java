@@ -9,29 +9,24 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleResourceNotFoundException(
             ResourceNotFoundException ex, WebRequest request) {
-
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
                 ex.getMessage(),
                 request.getDescription(false),
                 LocalDateTime.now()
         );
-
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(VacancyNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleVacancyNotFoundException(
             VacancyNotFoundException ex, WebRequest request) {
-
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
                 ex.getMessage(),
@@ -44,7 +39,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EmployerNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleEmployerNotFoundException(
             EmployerNotFoundException ex, WebRequest request) {
-
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
                 ex.getMessage(),
@@ -57,7 +51,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AreaNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleAreaNotFoundException(
             AreaNotFoundException ex, WebRequest request) {
-
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
                 ex.getMessage(),
@@ -70,7 +63,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HeadHunterApiException.class)
     public ResponseEntity<ErrorResponse> handleHeadHunterApiException(
             HeadHunterApiException ex, WebRequest request) {
-
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
                 ex.getMessage(),
@@ -79,7 +71,6 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
-
 
     @Getter
     @Setter
@@ -96,6 +87,4 @@ public class GlobalExceptionHandler {
             this.timestamp = timestamp;
         }
     }
-
-
 }

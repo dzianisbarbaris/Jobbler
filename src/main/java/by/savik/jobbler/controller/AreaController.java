@@ -1,8 +1,6 @@
 package by.savik.jobbler.controller;
 
 import by.savik.jobbler.entity.Area;
-import by.savik.jobbler.entity.Employer;
-import by.savik.jobbler.entity.Vacancy;
 import by.savik.jobbler.service.AreaServiceInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -22,7 +20,6 @@ import java.util.List;
 @RequestMapping("/api/area")
 @Tag(name = "Area Management", description = "APIs for managing areas")
 public class AreaController {
-
     private final AreaServiceInterface areaService;
 
     @Autowired
@@ -49,7 +46,7 @@ public class AreaController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<List<Area>> getAreasByKeyWord(@Parameter(description = "Area Name", required = true)
-                                                                @RequestParam String name) {
+                                                        @RequestParam String name) {
         List<Area> areas = areaService.getAreasByName(name);
         return ResponseEntity.ok(areas);
     }
@@ -62,7 +59,7 @@ public class AreaController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<List<Area>> getAreasByCountryName(@Parameter(description = "Country Name", required = true)
-                                                        @RequestParam String name) {
+                                                            @RequestParam String name) {
         List<Area> areas = areaService.getAreasByCountryName(name);
         return ResponseEntity.ok(areas);
     }

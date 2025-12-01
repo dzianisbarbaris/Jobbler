@@ -6,9 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +21,7 @@ public interface VacancyRepository extends JpaRepository<Vacancy, Long> {
     List<Vacancy> findAllWithEmployerAndArea();
 
     @Query("SELECT v FROM Vacancy v JOIN FETCH v.area WHERE UPPER(v.area.country) LIKE UPPER(:countryName)")
-    List<Vacancy> findByAreaCountryNameIgnoreCase(@Param("countryName")String countryName);
+    List<Vacancy> findByAreaCountryNameIgnoreCase(@Param("countryName") String countryName);
 
     List<Vacancy> findByAddressCityContainingIgnoreCase(String addressCity);
 

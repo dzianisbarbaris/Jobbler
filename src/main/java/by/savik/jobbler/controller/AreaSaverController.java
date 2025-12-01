@@ -1,6 +1,5 @@
 package by.savik.jobbler.controller;
 
-import by.savik.jobbler.dto.AreaDto;
 import by.savik.jobbler.entity.Area;
 import by.savik.jobbler.service.AreaSaverServiceInterface;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +21,6 @@ import java.util.List;
 @RequestMapping("/api/areaSaver")
 @Tag(name = "Area Saver Management", description = "APIs for converting DTO to Area and save to database")
 public class AreaSaverController {
-
     private final AreaSaverServiceInterface areaSaverService;
 
     @Autowired

@@ -3,11 +3,10 @@ package by.savik.jobbler.service;
 import by.savik.jobbler.entity.Employer;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface EmployerServiceInterface {
 
-    Employer createEmployer(Employer employer);
+    void createEmployer(Employer employer);
 
     List<Employer> getAllEmployers();
 

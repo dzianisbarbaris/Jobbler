@@ -2,14 +2,12 @@ package by.savik.jobbler.service;
 
 import by.savik.jobbler.entity.Vacancy;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 public interface VacancyServiceInterface {
 
-    Vacancy createVacancy(Vacancy vacancy);
+    void createVacancy(Vacancy vacancy);
 
     boolean isAbsentByHeadHunterId(Vacancy vacancy);
 

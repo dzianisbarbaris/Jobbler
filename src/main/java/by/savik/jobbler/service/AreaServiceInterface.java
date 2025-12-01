@@ -12,7 +12,7 @@ public interface AreaServiceInterface {
 
     List<Area> getAreasByCountryName(String name);
 
-    Area createArea(Area area);
+    void createArea(Area area);
 
     boolean isAbsentByHeadHunterId(Area area);
 }

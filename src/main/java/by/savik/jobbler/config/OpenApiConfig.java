@@ -1,10 +1,11 @@
 package by.savik.jobbler.config;
 
 import by.savik.jobbler.entity.ApiHeadHunterClientInterface;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +17,6 @@ import java.util.List;
 
 @Configuration
 public class OpenApiConfig {
-
     @Value("${api.hh.url}")
     private String url;
 
@@ -31,6 +31,7 @@ public class OpenApiConfig {
     public ApiHeadHunterClientInterface getApiHeadHunter() {
         return getRetrofitInstance().create(ApiHeadHunterClientInterface.class);
     }
+
 
     @Bean
     public OpenAPI customOpenAPI() {
