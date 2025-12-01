@@ -3,6 +3,7 @@ package by.savik.jobbler.service;
 import by.savik.jobbler.dto.VacancyDto;
 import by.savik.jobbler.entity.Vacancy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,8 +13,8 @@ import java.util.List;
 @Service
 public class VacancySaverService implements VacancySaverServiceInterface {
 
-    private static final List<String> dailyKeyWords = List.of("Java", "JavaScript", "DevOps", "IT Manager", "Developer",
-            "Python", "1C", "Quality Assurance", "Business Analyst", "Тестировщик", "Аналитик", "Разработчик");
+    private final List<String> dailyKeyWords = List.of("Разработчик", "Тестировщик", "Java", "JavaScript",
+            "DevOps", "IT Manager", "Developer", "Python", "1C", "Quality Assurance", "Business Analyst", "Аналитик");
 
     private final AreaServiceInterface areaService;
     private final EmployerServiceInterface employerService;
@@ -33,7 +34,8 @@ public class VacancySaverService implements VacancySaverServiceInterface {
     }
 
     @Transactional
-    public List<Vacancy> convertDtoToVacancyAndSave (String keyWord){
+    public List<Vacancy> convertDtoToVacancyAndSave(String keyWord) {
+        List<Vacancy> finalVacancyList = new ArrayList<>();
         List<VacancyDto> vacancyDtoList = headHunterService.getVacancyListFromHeadHunter(keyWord);
         List<Vacancy> vacancyList = dtoConverterService.convertAllDtoToVacancy(vacancyDtoList);
         for (Vacancy vacancy : vacancyList) {
@@ -45,15 +47,16 @@ public class VacancySaverService implements VacancySaverServiceInterface {
                     employerService.createEmployer(vacancy.getEmployer());
                 }
                 vacancyService.createVacancy(vacancy);
+                finalVacancyList.add(vacancy);
             }
         }
-        return vacancyList;
+        return finalVacancyList;
     }
 
     @Transactional
-    public List<Vacancy> convertDailyDtoToVacanciesAndSave(){
+    public List<Vacancy> convertDailyDtoToVacanciesAndSave() {
         List<Vacancy> finalVacancyList = new ArrayList<>();
-        for (String keyWord : dailyKeyWords){
+        for (String keyWord : dailyKeyWords) {
             List<VacancyDto> vacancyDtoList = headHunterService.getVacancyListFromHeadHunter(keyWord);
             List<Vacancy> vacancyList = dtoConverterService.convertAllDtoToVacancy(vacancyDtoList);
             for (Vacancy vacancy : vacancyList) {
@@ -65,9 +68,9 @@ public class VacancySaverService implements VacancySaverServiceInterface {
                         employerService.createEmployer(vacancy.getEmployer());
                     }
                     vacancyService.createVacancy(vacancy);
+                    finalVacancyList.add(vacancy);
                 }
             }
-            finalVacancyList.addAll(vacancyList);
         }
         return finalVacancyList;
     }
