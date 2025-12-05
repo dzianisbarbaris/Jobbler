@@ -1,6 +1,7 @@
 package by.savik.jobbler.repository;
 
 import by.savik.jobbler.entity.Vacancy;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +16,7 @@ public interface VacancyRepository extends JpaRepository<Vacancy, Long> {
 
     Optional<Vacancy> findByHeadHunterId(Long headHunterId);
 
+    @EntityGraph(attributePaths = {"employer", "area"})
     List<Vacancy> findByNameContainingIgnoreCase(String name);
 
     @Query("SELECT v FROM Vacancy v JOIN FETCH v.employer JOIN FETCH v.area")
