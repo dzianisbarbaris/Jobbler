@@ -22,15 +22,15 @@ public class VacancyDto {
     private AddressDto address;
 
     @JsonProperty("created_at")
-    private Date created_at;
+    private Date createdAt;
 
     @JsonProperty("alternate_url")
-    private String alternate_url;
+    private String alternateUrl;
 
     @JsonProperty("employer")
     private EmployerDto employer;
 
     public LocalDateTime dateMapper() {
-        return this.created_at.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        return this.createdAt.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 }

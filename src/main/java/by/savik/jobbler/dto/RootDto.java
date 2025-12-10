@@ -21,5 +21,5 @@ public class RootDto {
     private int page;
 
     @JsonProperty("per_page")
-    private int per_page;
+    private int perPage;
 }

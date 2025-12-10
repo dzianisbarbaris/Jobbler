@@ -12,8 +12,8 @@ public class EmployerDto {
     private String name;
 
     @JsonProperty("alternate_url")
-    private String alternate_url;
+    private String alternateUrl;
 
     @JsonProperty("country_id")
-    private Long country_id;
+    private Long countryId;
 }

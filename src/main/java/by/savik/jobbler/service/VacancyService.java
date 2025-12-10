@@ -67,6 +67,12 @@ public class VacancyService implements VacancyServiceInterface {
 
     @Transactional
     public void createVacancy(Vacancy vacancy) {
+        if (vacancy.getArea() == null) {
+            throw new IllegalArgumentException("Area cannot be null");
+        }
+        if (vacancy.getEmployer() == null) {
+            throw new IllegalArgumentException("Employer cannot be null");
+        }
         Long areaHeadHunterId = vacancy.getArea().getHeadHunterId();
         Area area = areaRepository.findByHeadHunterId(areaHeadHunterId)
                 .orElseThrow(() -> new ResourceNotFoundException("Area not found with HeadHunterId: " + areaHeadHunterId));

@@ -11,7 +11,7 @@ public class AreaDto {
     private Long id;
 
     @JsonProperty("parent_id")
-    private String parent_id;
+    private String parentId;
 
     @JsonProperty("name")
     private String name;

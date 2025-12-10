@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/areaSaver")
 @Tag(name = "Area Saver Management", description = "APIs for converting DTO to Area and save to database")

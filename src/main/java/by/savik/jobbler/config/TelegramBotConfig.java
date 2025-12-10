@@ -1,30 +1,30 @@
 package by.savik.jobbler.config;
 
-import by.savik.jobbler.bot.TelegramBotService;
+import by.savik.jobbler.bot.TelegramBot;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @Configuration
+@Slf4j
 public class TelegramBotConfig {
+    private final TelegramBot bot;
 
-    private final TelegramBotService bot;
-
-
-    public TelegramBotConfig(TelegramBotService bot) {
+    public TelegramBotConfig(TelegramBot bot) {
         this.bot = bot;
     }
 
     @PostConstruct
-    public void registerBot(){
+    public void registerBot() {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(bot);
-            System.out.println("Телеграм бот успешно зарегистрирован!");
+            log.info("Телеграм бот успешно зарегистрирован!");
         } catch (TelegramApiException e) {
-            System.err.println("Ошибка при регистрации бота! " + e.getMessage());;
+            log.debug("Ошибка при регистрации бота! {}", e.getMessage());
         }
     }
 }

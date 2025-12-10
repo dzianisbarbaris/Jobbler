@@ -28,15 +28,24 @@ public class DtoConverterService implements DtoConverterServiceInterface {
     }
 
     public Vacancy convertVacancyDtoToVacancy(VacancyDto vacancyDto) {
+        if (vacancyDto.getArea() == null) {
+            throw new IllegalArgumentException("Area cannot be null in VacancyDto");
+        }
+        if (vacancyDto.getEmployer() == null) {
+            throw new IllegalArgumentException("Employer cannot be null in VacancyDto");
+        }
+        if (vacancyDto.getCreatedAt() == null) {
+            throw new IllegalArgumentException("CreatedAt cannot be null in VacancyDto");
+        }
         return new Vacancy(
                 vacancyDto.getId(),
                 vacancyDto.getName(),
                 Optional.ofNullable(vacancyDto.getAddress()).map(AddressDto::getCity).orElse(null),
                 Optional.ofNullable(vacancyDto.getAddress()).map(AddressDto::getStreet).orElse(null),
                 vacancyDto.dateMapper(),
-                vacancyDto.getAlternate_url(),
+                vacancyDto.getAlternateUrl(),
                 new Area(vacancyDto.getArea().getId(), vacancyDto.getArea().getName()),
-                new Employer(vacancyDto.getEmployer().getId(), vacancyDto.getEmployer().getName(), vacancyDto.getEmployer().getAlternate_url())
+                new Employer(vacancyDto.getEmployer().getId(), vacancyDto.getEmployer().getName(), vacancyDto.getEmployer().getAlternateUrl())
         );
     }
 
