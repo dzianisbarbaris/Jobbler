@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -21,7 +22,7 @@ public class CsvCreateService implements CsvCreateServiceInterface {
         String safeKeyword = keyword.replaceAll("[^a-zA-Zа-яА-Я0-9]", "_");
         File csvFile = File.createTempFile("vacancies_" + safeKeyword + "_" + timestamp, ".csv");
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile));
+        try (BufferedWriter writer = Files.newBufferedWriter(csvFile.toPath(), StandardCharsets.UTF_8);
              CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.builder()
                      .setRecordSeparator("\n")
                      .build())) {

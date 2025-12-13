@@ -40,8 +40,9 @@ public class HeadHunterService implements HeadHunterServiceInterface {
                 throw new IllegalStateException("Items list is empty!");
             }
             finalItemsList.addAll(items);
-            int pages = firstRootResponse.body().getPages();
-            for (int i = 1; i < pages; i++) {
+            int pages = Objects.requireNonNull(firstRootResponse.body()).getPages();
+            int maxPages = Math.min(pages, 20);
+            for (int i = 1; i < maxPages; i++) {
                 Response<RootDto> nextRootResponse = apiClient.getAllOtherJsons(i, text).execute();
                 if (!nextRootResponse.isSuccessful()) {
                     throw new HttpException(nextRootResponse);
@@ -51,9 +52,9 @@ public class HeadHunterService implements HeadHunterServiceInterface {
                     throw new IllegalStateException("Items list is empty!");
                 }
                 finalItemsList.addAll(itemsNext);
-                Thread.sleep(random.nextInt(2000, 5000));
-            }
-        } catch (IOException | InterruptedException e) {
+                    Thread.sleep(random.nextInt(2000, 5000));
+                }
+        } catch (InterruptedException | IOException e) {
             throw new HeadHunterApiException("Ошибка при обработке запроса к HeadHunter", e);
         }
         log.debug(String.valueOf(finalItemsList.size()));

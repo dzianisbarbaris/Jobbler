@@ -1,6 +1,7 @@
 package by.savik.jobbler.bot;
 
 import by.savik.jobbler.entity.Vacancy;
+import by.savik.jobbler.exception.VacancyNotFoundException;
 import by.savik.jobbler.service.CsvCreateServiceInterface;
 import by.savik.jobbler.service.VacancyServiceInterface;
 import lombok.Getter;
@@ -61,6 +62,11 @@ public class TelegramBot extends TelegramLongPollingBot {
                         /search keyword - Поиск вакансий по ключевому слову (возвращает CSV файл)
                         
                         Пример: /search Java""");
+            } else if (messageText.startsWith("/search galera")) {
+                sendMessage(chatId, """
+                        ❌ Уходите!!! Вам здесь не рады!!!
+                        
+                        За всей информацией обращайтесь по адресу https://galera.by/""");
             } else if (messageText.startsWith("/search")) {
                 handleSearchCommand(chatId, messageText);
             } else {
@@ -89,20 +95,16 @@ public class TelegramBot extends TelegramLongPollingBot {
         File csvFile = null;
         try {
             List<Vacancy> vacancies = vacancyService.getVacanciesByName(keyword);
-            if (vacancies.isEmpty()) {
-                sendMessage(chatId, "🔍 Не найдено вакансий по ключевому слову: \"" + keyword + "\"");
-                return;
-            }
-            //Создаём временный CSV файл
             csvFile = csvCreateService.createCsvFile(vacancies, keyword);
-            //Отправляем CSV файл
             sendCsvFile(chatId, csvFile, keyword, vacancies.size());
 
+        } catch (VacancyNotFoundException _) {
+            sendMessage(chatId, "🔍 Не найдено вакансий по ключевому слову: \"" + keyword + "\"");
+            log.debug("Вакансии не найдены по ключевому слову: {}", keyword);
         } catch (Exception e) {
             sendMessage(chatId, "❌ При поиске вакансий произошла ошибка. Пожалуйста, повторите попытку позже.");
-            log.debug(e.getMessage());
+            log.error("Ошибка при поиске вакансий по ключевому слову: {}", keyword, e);
         } finally {
-            //Удаляем временный CSV файл
             if (csvFile != null && csvFile.exists()) {
                 try {
                     Files.delete(csvFile.toPath());

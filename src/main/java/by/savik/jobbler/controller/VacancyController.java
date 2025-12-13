@@ -93,8 +93,8 @@ public class VacancyController {
             @ApiResponse(responseCode = "204", description = "Vacancies deleted successfully"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    public ResponseEntity<Void> deleteVacanciesByDate(@Parameter(description = "Date ISO format", required = true)
-                                                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime date) {
+    public ResponseEntity<Void> deleteVacanciesByDate(@Parameter(description = "Date and time in ISO format (e.g., 2025-12-10T12:00:00)", required = true)
+                                                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
         vacancyService.deleteByCreatedDateBefore(date);
         return ResponseEntity.noContent().build();
     }

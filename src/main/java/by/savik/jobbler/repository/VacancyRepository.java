@@ -25,7 +25,7 @@ public interface VacancyRepository extends JpaRepository<Vacancy, Long> {
     @Query("SELECT v FROM Vacancy v JOIN FETCH v.area WHERE UPPER(v.area.country) LIKE UPPER(:countryName)")
     List<Vacancy> findByAreaCountryNameIgnoreCase(@Param("countryName") String countryName);
 
-    List<Vacancy> findByAddressCityContainingIgnoreCase(String addressCity);
+    List<Vacancy> findByAddressCityIgnoreCase(String addressCity);
 
     void deleteByCreatedDateBefore(LocalDateTime date);
 }

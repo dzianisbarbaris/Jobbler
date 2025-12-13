@@ -64,12 +64,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleHeadHunterApiException(
             HeadHunterApiException ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(
-                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.BAD_GATEWAY.value(),
                 ex.getMessage(),
                 request.getDescription(false),
                 LocalDateTime.now()
         );
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_GATEWAY);
     }
 
     @Getter

@@ -47,7 +47,7 @@ public class VacancyService implements VacancyServiceInterface {
 
     @Transactional(readOnly = true)
     public List<Vacancy> getVacanciesByAddressCity(String addressCity) {
-        List<Vacancy> vacancyList = vacancyRepository.findByAddressCityContainingIgnoreCase(addressCity);
+        List<Vacancy> vacancyList = vacancyRepository.findByAddressCityIgnoreCase(addressCity);
         if (vacancyList.isEmpty()) {
             throw new VacancyNotFoundException("Vacancy not found by addressCity: " + addressCity);
         } else {

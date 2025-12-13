@@ -1,5 +1,4 @@
 package by.savik.jobbler.dto;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 

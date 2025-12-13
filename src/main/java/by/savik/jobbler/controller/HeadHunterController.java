@@ -28,7 +28,7 @@ public class HeadHunterController {
         this.headHunterService = headHunterService;
     }
 
-    @GetMapping("/vacancy/keyword")
+    @GetMapping("/getVacancyByKeyword")
     @Operation(summary = "Get vacancy list", description = "Get vacancy list by keyword from HeadHunter")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved list of vacancies"),
@@ -42,7 +42,7 @@ public class HeadHunterController {
         return ResponseEntity.ok(vacancyListFromHeadHunter);
     }
 
-    @GetMapping("/area")
+    @GetMapping("/getAllAreas")
     @Operation(summary = "Get All areas list", description = "Get areas list from HeadHunter")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved list of areas"),
@@ -53,7 +53,7 @@ public class HeadHunterController {
         return ResponseEntity.ok(allAreasList);
     }
 
-    @GetMapping("/area/getByParentId")
+    @GetMapping("/getAreasByParentId")
     @Operation(summary = "Get area list by parent id", description = "Get area list by parent id from HeadHunter and set country")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved list of areas"),

@@ -15,11 +15,11 @@ import java.util.Arrays;
 @Aspect
 @Slf4j
 public class LoggingAspect {
-    @Pointcut("execution(public * by.savik.jobbler.controller.*.*(..))*")
+    @Pointcut("execution(public * by.savik.jobbler.controller..*.*(..))")
     public void controllerLog() {
     }
 
-    @Pointcut("execution(public * by.savik.jobbler.service.*.*(..))*")
+    @Pointcut("execution(public * by.savik.jobbler.service..*.*(..))")
     public void serviceLog() {
     }
 
