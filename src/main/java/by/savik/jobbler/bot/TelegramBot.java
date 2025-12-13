@@ -46,20 +46,28 @@ public class TelegramBot extends TelegramLongPollingBot {
             String messageText = update.getMessage().getText();
             Long chatId = update.getMessage().getChatId();
             if (messageText.startsWith("/start")) {
-                sendMessage(chatId, "👋 Добро пожаловать в Jobbler Bot!\n\n" +
-                        "Я могу помочь вам в поиске вакансий.\n\n" +
-                        "Используйте /help, чтобы просмотреть доступные команды.");
+                sendMessage(chatId, """
+                        👋 Добро пожаловать в Jobbler Bot!
+                        
+                        Я могу помочь вам в поиске вакансий.
+                        
+                        Используйте /help, чтобы просмотреть доступные команды.""");
             } else if (messageText.startsWith("/help")) {
-                sendMessage(chatId, "📋 Доступные команды:\n\n" +
-                        "/start - Запуск бота\n" +
-                        "/help - Справочное сообщение\n" +
-                        "/search keyword - Поиск вакансий по ключевому слову (возвращает CSV файл)\n\n" +
-                        "Пример: /search Java");
+                sendMessage(chatId, """
+                        📋 Доступные команды:
+                        
+                        /start - Запуск бота
+                        /help - Справочное сообщение
+                        /search keyword - Поиск вакансий по ключевому слову (возвращает CSV файл)
+                        
+                        Пример: /search Java""");
             } else if (messageText.startsWith("/search")) {
                 handleSearchCommand(chatId, messageText);
             } else {
-                sendMessage(chatId, "❌ Я такой команды не знаю.\n\n" +
-                        "Но я быстро учусь и когда-нибудь вам отвечу.");
+                sendMessage(chatId, """
+                        ❌ Я такой команды не знаю.
+                        
+                        Но я быстро учусь и когда-нибудь вам отвечу.""");
             }
         }
     }
@@ -67,8 +75,10 @@ public class TelegramBot extends TelegramLongPollingBot {
     public void handleSearchCommand(Long chatId, String messageText) {
         String keyword = messageText.substring("/search".length()).trim();
         if (keyword.isEmpty()) {
-            sendMessage(chatId, "❌ Пожалуйста, укажите ключевое слово для поиска.\n\n" +
-                    "Пример: /search Java");
+            sendMessage(chatId, """
+                    ❌ Пожалуйста, укажите ключевое слово для поиска.
+                    
+                    Пример: /search Java""");
             return;
         }
         searchVacancies(chatId, keyword);

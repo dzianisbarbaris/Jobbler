@@ -38,9 +38,6 @@ public class Employer {
     @Column(length = 100)
     private String url;
 
-    public Employer() {
-    }
-
     public Employer(Long headHunterId, String name, String url) {
         this.headHunterId = headHunterId;
         this.name = name;

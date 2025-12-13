@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- Конфигурация для файла логов -->
+    <property name="LOG_FILE" value="${LOG_FILE:-logback/jobblerApp.log}"/>
+    <property name="LOG_PATH" value="${LOG_PATH:-${LOG_FILE:-logback/jobblerApp.log}}"/>
+
+    <!-- Аппендер для записи в файл -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        
+        <!-- Политика ротации логов -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- Ротация каждый день -->
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- Максимальный размер файла перед архивацией -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- Хранение логов за последние 30 дней -->
+            <maxHistory>30</maxHistory>
+            <!-- Общий максимальный размер всех логов -->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Аппендер для консоли -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- Логирование для приложения -->
+    <logger name="by.savik.jobbler" level="INFO"/>
+    
+    <!-- Логирование для Spring Framework -->
+    <logger name="org.springframework" level="INFO"/>
+    
+    <!-- Логирование для Hibernate/JPA -->
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    
+    <!-- Логирование для Retrofit -->
+    <logger name="retrofit2" level="INFO"/>
+    
+    <!-- Логирование для Telegram Bot -->
+    <logger name="org.telegram" level="INFO"/>
+
+    <!-- Корневой логгер -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>

@@ -55,20 +55,8 @@ public class VacancySaverService implements VacancySaverServiceInterface {
     public List<Vacancy> convertDailyDtoToVacanciesAndSave() {
         List<Vacancy> finalVacancyList = new ArrayList<>();
         for (String keyWord : dailyKeyWords) {
-            List<VacancyDto> vacancyDtoList = headHunterService.getVacancyListFromHeadHunter(keyWord);
-            List<Vacancy> vacancyList = dtoConverterService.convertAllDtoToVacancy(vacancyDtoList);
-            for (Vacancy vacancy : vacancyList) {
-                if (vacancyService.isAbsentByHeadHunterId(vacancy)) {
-                    if (areaService.isAbsentByHeadHunterId(vacancy.getArea())) {
-                        areaService.createArea(vacancy.getArea());
-                    }
-                    if (employerService.isAbsentByHeadHunterId(vacancy.getEmployer())) {
-                        employerService.createEmployer(vacancy.getEmployer());
-                    }
-                    vacancyService.createVacancy(vacancy);
-                    finalVacancyList.add(vacancy);
-                }
-            }
+            List<Vacancy> vacancies = convertDtoToVacancyAndSave(keyWord);
+            finalVacancyList.addAll(vacancies);
         }
         return finalVacancyList;
     }
