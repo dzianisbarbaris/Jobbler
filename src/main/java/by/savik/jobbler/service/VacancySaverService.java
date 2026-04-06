@@ -51,7 +51,6 @@ public class VacancySaverService implements VacancySaverServiceInterface {
         return finalVacancyList;
     }
 
-    @Transactional
     public List<Vacancy> convertDailyDtoToVacanciesAndSave() {
         List<Vacancy> finalVacancyList = new ArrayList<>();
         for (String keyWord : dailyKeyWords) {
